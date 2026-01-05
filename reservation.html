@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Резервації</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="reservation.css">
+</head>
+<body>
+  <div class="layout">
+    <header class="header">
+      <h1 class="header__title">Резервації</h1>
+      <p class="header__subtitle">Manual + Quandoo</p>
+    </header>
+
+    <div class="top-nav">
+      <a class="top-nav__btn" href="index.html">Головна</a>
+      <a class="top-nav__btn" href="schedule.html">Розклад</a>
+      <a class="top-nav__btn top-nav__btn--active" href="reservation.html">Резервації</a>
+      <a class="top-nav__btn" href="tasks.html">Завдання</a>
+      <a class="top-nav__btn" href="calendar.html">Календар</a>
+    </div>
+
+    <main>
+      <div class="card">
+
+        <div class="res-toolbar">
+  <div class="res-toolbar__row">
+    <div class="res-tabs" role="tablist" aria-label="Фільтри">
+      <button id="tab-today"    class="res-tab is-active" type="button">Сьогодні</button>
+      <button id="tab-tomorrow" class="res-tab" type="button">Завтра</button>
+      <button id="tab-week"     class="res-tab" type="button">Тиждень</button>
+      <button id="tab-month"    class="res-tab" type="button">Місяць</button>
+      <button id="tab-all"      class="res-tab" type="button">Всі</button>
+    </div>
+
+    <!-- ✅ дата всегда видна -->
+    <div class="res-date res-date--inline" id="res-date-wrap">
+      <span class="res-date__label">Обрати дату</span>
+      <input id="res-date-input" class="res-date__input" type="date" />
+      <button id="res-date-clear" class="res-btn" type="button">Скинути</button>
+    </div>
+  </div>
+
+  <div class="res-status">
+    <span id="res-status-text">Завантаження…</span>
+    <span id="res-error-text" class="res-error" style="display:none;"></span>
+  </div>
+</div>
+
+        <div class="res-board">
+          <!-- timeline line "now" вставляется сюда -->
+          <div id="res-nowline" class="res-nowline" style="display:none;">
+            <div class="res-nowline__label">Зараз</div>
+          </div>
+
+          <div id="res-days"></div>
+        </div>
+
+        <div class="res-divider"></div>
+
+        <div class="res-new">
+          <div class="res-new__title">Нова резервація (manual)</div>
+
+          <div class="res-new__grid">
+            <label class="res-f">
+              <span>Підтв.</span>
+              <input id="new-confirmed" type="checkbox" class="res-checkbox">
+            </label>
+
+            <label class="res-f">
+              <span>Дата (dd.mm.yyyy)</span>
+              <input id="new-date" class="res-field" placeholder="26.12.2025">
+            </label>
+
+            <label class="res-f">
+              <span>Час</span>
+              <input id="new-time" class="res-field" placeholder="18:30">
+            </label>
+
+            <label class="res-f">
+              <span>К-ть</span>
+              <input id="new-guests" class="res-field" placeholder="2">
+            </label>
+
+            <label class="res-f span-2">
+              <span>Місце / Стіл</span>
+              <input id="new-table" class="res-field" placeholder="Stuberl">
+            </label>
+
+            <label class="res-f span-2">
+              <span>Від кого</span>
+              <input id="new-from" class="res-field" placeholder="Імʼя Прізвище">
+            </label>
+
+            <label class="res-f span-2">
+              <span>Email</span>
+              <input id="new-email" class="res-field">
+            </label>
+
+            <label class="res-f span-2">
+              <span>Телефон</span>
+              <input id="new-phone" class="res-field">
+            </label>
+
+            <label class="res-f span-2">
+              <span>Примітка (опц.)</span>
+              <input id="new-note" class="res-field">
+            </label>
+          </div>
+
+          <div class="res-new__actions">
+            <button id="res-add" class="res-btn res-btn--primary" type="button">Додати</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- EDIT MODAL -->
+  <div id="edit-modal" class="res-modal res-modal--hidden" aria-hidden="true">
+    <div class="res-modal__backdrop"></div>
+    <div class="res-modal__panel" role="dialog" aria-modal="true" aria-label="Редагування">
+      <div class="res-modal__head">
+        <div class="res-modal__title">Редагувати (manual)</div>
+        <button id="edit-close" class="res-iconbtn" type="button">✕</button>
+      </div>
+
+      <div class="res-modal__body">
+        <div class="res-new__grid">
+          <label class="res-f">
+            <span>Підтв.</span>
+            <input id="edit-confirmed" type="checkbox" class="res-checkbox">
+          </label>
+
+          <label class="res-f">
+            <span>Дата</span>
+            <input id="edit-date" class="res-field" placeholder="26.12.2025">
+          </label>
+
+          <label class="res-f">
+            <span>Час</span>
+            <input id="edit-time" class="res-field" placeholder="18:30">
+          </label>
+
+          <label class="res-f">
+            <span>К-ть</span>
+            <input id="edit-guests" class="res-field" placeholder="2">
+          </label>
+
+          <label class="res-f span-2">
+            <span>Місце / Стіл</span>
+            <input id="edit-table" class="res-field">
+          </label>
+
+          <label class="res-f span-2">
+            <span>Від кого</span>
+            <input id="edit-from" class="res-field">
+          </label>
+
+          <label class="res-f span-2">
+            <span>Email</span>
+            <input id="edit-email" class="res-field">
+          </label>
+
+          <label class="res-f span-2">
+            <span>Телефон</span>
+            <input id="edit-phone" class="res-field">
+          </label>
+
+          <label class="res-f span-2">
+            <span>Примітка</span>
+            <input id="edit-note" class="res-field">
+          </label>
+        </div>
+      </div>
+
+      <div class="res-modal__foot">
+        <button id="edit-save" class="res-btn res-btn--primary" type="button">Зберегти</button>
+        <button id="edit-cancel" class="res-btn" type="button">Скасувати</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="global-loader" class="global-loader global-loader--hidden">
+    <div class="spinner"></div>
+    <div id="global-loader-text" class="global-loader__text">Завантаження…</div>
+  </div>
+
+  <div id="toast" class="res-toast" style="display:none;"></div>
+
+  <script src="reservation.js"></script>
+</body>
+</html>

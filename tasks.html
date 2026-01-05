@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Завдання</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="tasks.css">
+</head>
+<body>
+  <div class="layout">
+    <header class="header">
+      <h1 class="header__title">Завдання</h1>
+      <p class="header__subtitle">Швидкі задачі: срочність + строк + відповідальний</p>
+    </header>
+
+    <div class="top-nav">
+      <a class="top-nav__btn" href="index.html">Головна</a>
+      <a class="top-nav__btn" href="schedule.html">Розклад</a>
+      <a class="top-nav__btn" href="reservation.html">Резервації</a>
+      <a class="top-nav__btn top-nav__btn--active" href="tasks.html">Завдання</a>
+      <a class="top-nav__btn" href="calendar.html">Календар</a>
+    </div>
+
+    <main>
+      <div class="dashboard-module">
+       <div class="module-header module-header--tasks">
+  <div class="module-header__left">
+    <h2 class="module-title" id="tasksBlockTitle">Вхідні завдання</h2>
+    <div class="module-subtitle" id="taskCounter"></div>
+  </div>
+
+  <button class="add-btn" id="btn-add-task" type="button">
+    <span class="add-btn__plus">+</span>
+    <span class="add-btn__text">Нова задача</span>
+  </button>
+</div>
+
+        <div class="tasks-toolbar">
+          <div class="tasks-filters">
+            <button class="pill pill--active" data-filter="all" type="button">Усі</button>
+            <button class="pill" data-filter="red" type="button">🔴 Срочно</button>
+            <button class="pill" data-filter="blue" type="button">🔵 Звичайно</button>
+            <button class="pill" data-filter="done" type="button">Виконані</button>
+          </div>
+
+          <div class="tasks-sort">
+            <select id="assigneeFilter" class="form-input">
+              <option value="__all__">Відповідальний: Усі</option>
+              <option value="__none__">Відповідальний: Без відповідального</option>
+            </select>
+
+            <select id="sortMode" class="form-input">
+              <option value="priority">Сортувати: срочність</option>
+              <option value="due">Сортувати: строк</option>
+              <option value="new">Сортувати: нові</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="module-content">
+         
+          <div id="taskList" class="task-list">
+            <div class="task-empty">Завантаження…</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop modal-hidden" id="taskModal">
+    <div class="modal">
+      <div class="modal-header">
+  <div class="modal-title" id="taskModalTitle">Нова задача</div>
+
+  <button class="modal-close" type="button" aria-label="Закрити" onclick="closeModal(true)">
+    ✕
+  </button>
+</div>
+
+     <div class="form-grid">
+  <div class="full">
+    <label class="form-label">Задача</label>
+    <input id="taskTitle" class="form-input" placeholder="Напр: Оджан — батареї: подзвонити" />
+  </div>
+
+  <div class="full">
+    <label class="form-label">Срочність</label>
+    <div class="seg">
+      <button class="seg-btn seg-btn--active" data-priority="red" type="button">🔴 Срочно</button>
+      <button class="seg-btn" data-priority="blue" type="button">🔵 Звичайно</button>
+    </div>
+  </div>
+
+  <div>
+    <label class="form-label">Строк (необовʼязково)</label>
+    <input id="taskDue" class="form-input" placeholder="DD.MM.YYYY або пусто" />
+  </div>
+
+  <div>
+    <label class="form-label">Відповідальний</label>
+    <select id="taskAssignee" class="form-input">
+      <option value="">— не вибрано —</option>
+    </select>
+  </div>
+
+  <div class="full">
+    <label class="form-label">Коментар</label>
+    <textarea id="taskComment" class="form-input" rows="7"
+      placeholder="Можна писати багато тексту…"></textarea>
+  </div>
+</div>
+
+      <div class="modal-actions">
+        <button class="btn-ghost" id="btn-cancel" type="button">Скасувати</button>
+        <button class="btn-primary" id="btn-save" type="button">Зберегти</button>
+      </div>
+
+      <div class="modal-hint">Клік по задачі = редагування. “Готово” = у виконані. “Повернути” = назад.</div>
+    </div>
+  </div>
+
+  <div id="global-loader" class="global-loader global-loader--hidden">
+    <div class="spinner"></div>
+    <div id="global-loader-text" class="global-loader__text">Завантаження…</div>
+  </div>
+
+  <script src="tasks.js"></script>
+</body>
+</html>

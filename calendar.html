@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Календар</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Стили сайта -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="calendar.css">
+  <!-- Roboto (как у Google) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- FullCalendar -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+</head>
+
+<body>
+  <div class="layout">
+    <header class="header">
+      <h1 class="header__title">Календар</h1>
+      <p class="header__subtitle">Події з Google Calendar</p>
+    </header>
+
+    <!-- Навигация сайта (без изменений шрифта!) -->
+    <div class="top-nav">
+      <a class="top-nav__btn" href="index.html">Головна</a>
+      <a class="top-nav__btn" href="schedule.html">Розклад</a>
+      <a class="top-nav__btn" href="reservation.html">Резервації</a>
+      <a class="top-nav__btn" href="tasks.html">Завдання</a>
+      <a class="top-nav__btn top-nav__btn--active" href="calendar.html">Календар</a>
+    </div>
+
+    <main class="gcal-scope">
+      <div class="gcal-shell">
+        <!-- ❌ НЕТ "Сьогодні" / ❌ НЕТ "День" -->
+        <div class="gcal-bar">
+          <div class="gcal-left">
+            <button class="gbtn" id="calPrev" aria-label="Prev">‹</button>
+            <button class="gbtn" id="calNext" aria-label="Next">›</button>
+          </div>
+
+          <div class="gcal-center">
+            <div class="gcal-title" id="calTitle">—</div>
+          </div>
+
+          <div class="gcal-right">
+            <div class="gselect-wrap">
+              <select class="gselect" id="viewSelect">
+  <option value="DAY">День</option>          <!-- показываем ТОЛЬКО на телефоне -->
+  <option value="WEEK" selected>Тиждень</option>
+  <option value="MONTH">Місяць</option>
+</select>
+            </div>
+          </div>
+        </div>
+
+        <div id="calendar"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales-all.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
+
+  <script src="calendar.js?v=401"></script>
+</body>
+</html>

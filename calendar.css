@@ -1,0 +1,203 @@
+:root{
+  --g-bg: #f8f9fa;
+  --g-surface: #ffffff;
+  --g-text: #202124;
+  --g-muted: #5f6368;
+  --g-line: #dadce0;
+  --g-hover: #f1f3f4;
+  --g-today: rgba(26,115,232,.10);
+  --g-blue: #1a73e8;
+  --g-shadow: 0 10px 20px rgba(15,23,42,.06);
+  --g-radius: 14px;
+  --g-font: Roboto, system-ui, -apple-system, Segoe UI, Arial;
+}
+
+body{ background: var(--g-bg); }
+.gcal-scope{ font-family: var(--g-font); }
+
+.gcal-shell{
+  background: var(--g-surface);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--g-radius);
+  box-shadow: var(--g-shadow);
+  overflow: hidden;
+}
+
+.gcal-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--g-bg);
+  border-bottom: 1px solid rgba(218,220,224,.7);
+  font-family: var(--g-font);
+}
+
+.gcal-left, .gcal-center, .gcal-right{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap; min-width:0;
+}
+
+.gcal-title{
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--g-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55vw;
+}
+
+.gbtn{
+  height: 36px; width: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(218,220,224,.95);
+  background: #fff;
+  color: var(--g-text);
+  display:inline-flex; align-items:center; justify-content:center;
+  cursor:pointer; user-select:none;
+  font-size: 18px; line-height: 1;
+  font-family: var(--g-font);
+}
+.gbtn:hover{ background: var(--g-hover); }
+.gbtn:active{ transform: translateY(1px); }
+
+.gselect-wrap{ position:relative; display:inline-flex; align-items:center; }
+.gselect{
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(218,220,224,.95);
+  background: #fff;
+  color: var(--g-text);
+  font-weight: 500;
+  padding: 0 34px 0 12px;
+  cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+  font-family: var(--g-font);
+}
+.gselect:hover{ background: var(--g-hover); }
+.gselect-wrap:after{
+  content:"▾";
+  position:absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--g-muted);
+  pointer-events:none;
+  font-size: 12px;
+}
+
+/* FullCalendar base */
+#calendar{ background:#fff; font-family: var(--g-font); }
+
+.fc{
+  --fc-border-color: rgba(218,220,224,.9);
+  --fc-page-bg-color: #fff;
+  --fc-neutral-bg-color: #fff;
+  --fc-today-bg-color: var(--g-today);
+  --fc-now-indicator-color: #d93025;
+  font-family: var(--g-font);
+  color: var(--g-text);
+}
+.fc .fc-toolbar{ display:none; }
+
+.fc .fc-col-header-cell-cushion{
+  color: var(--g-muted);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 10px 0;
+}
+
+.fc .fc-timegrid-slot-label{
+  color: var(--g-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ===== MONTH (как Google: точка + строка) ===== */
+.fc-dayGridMonth-view .fc-daygrid-day-number{
+  color: var(--g-text);
+  font-weight: 500;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.fc-dayGridMonth-view .fc-daygrid-event{
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 2px 8px !important;
+}
+.fc-dayGridMonth-view .fc-daygrid-event .fc-event-main{
+  padding: 0 !important;
+}
+.fc-dayGridMonth-view .fc-event{
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+}
+.fc-dayGridMonth-view .fc-event-title{
+  position: relative;
+  padding-left: 14px;
+  color: #202124 !important;
+  font-weight: 400 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:block;
+}
+.fc-dayGridMonth-view .fc-event-title:before{
+  content:"";
+  position:absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--dot-color, #7e57c2);
+}
+.fc-dayGridMonth-view .fc-event-time{
+  color: var(--g-muted) !important;
+  font-weight: 400 !important;
+  margin-right: 6px;
+}
+
+/* Selected day (синий кружок вокруг числа) */
+.fc .fc-daygrid-day.fc-day-selected .fc-daygrid-day-number{
+  background: var(--g-blue);
+  color: #fff !important;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin: 4px 0 0 6px;
+}
+
+/* WEEK events */
+.fc-timeGridWeek-view .fc-event{
+  border: 0 !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  box-shadow: none !important;
+  font-family: var(--g-font);
+}
+.fc-timeGridWeek-view .fc-timegrid-event{ margin: 2px 6px !important; }
+
+.ampm{
+  font-size: 11px;
+  margin-left: 2px;
+  color: var(--g-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 640px){
+  .gcal-title{ font-size: 18px; max-width: 50vw; }
+  .fc .fc-timegrid-slot{ height: 40px; }
+}
