@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "express-session": "^1.17.3",
-    "node-fetch": "^2.7.0"
+    "express-session": "^1.17.3"
   }
 }
